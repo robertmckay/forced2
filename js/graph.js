@@ -2,6 +2,7 @@ var Graph = function(targetElement, graph) {
 
     var self = this;
     graph.id = false;
+    graph.filterActive = false;
 
     var svg = d3.select("svg"),
         width = svg.attr("width"),
@@ -96,14 +97,17 @@ var Graph = function(targetElement, graph) {
 
             function addRectangle(elem, n) {
                 // elem.selectAll("rect").remove();
-                if (elem.select("rect").empty() || graph.id != false) {
+                var id = graph.id;
+                if (elem.select("rect").empty() || id != false || graph.filterActive) {
                     elem.select("rect").remove();
                     var stroke = 0;
                     console.log(graph.id);
-                    var id = graph.id;
                     if (id) {
-                        stroke = (id == n.id) || (id + ':0' == n.id) ? '4' : '0';
-                    }
+                       stroke = (id == n.id) || (id + ':0' == n.id) ? '4' : '0';
+                       graph.filterActive = true;
+                    } else {
+                        graph.filterActive = false;
+                    };
                     console.log(stroke)
                     elem.append("rect")
                         .attr("width", 30)
@@ -117,7 +121,7 @@ var Graph = function(targetElement, graph) {
                             .on("start", dragstarted)
                             .on("drag", dragged)
                             .on("end", dragended));
-                }
+                };
             };
 
             // Squares start on a corner, Circles in the middle
@@ -209,10 +213,6 @@ var targetElement = document.querySelector('svg');
 var gobj;
 var gdata;
 
-// d3.json("visual1.json", function(error, data) {
-//     gobj  = new Graph(targetElement, data);
-//     gdata = data;
-// });
 
 var request = new XMLHttpRequest();
 request.open('GET', '/visual.1', true);
@@ -318,6 +318,7 @@ var form = document.getElementById("form1"),
     text = document.getElementById("filter");
 form.addEventListener('submit', function(e) {
     e.preventDefault();
+    var value = text.value  == '' ? false : text.value ;
     gobj.underline(text.value)
 
 });
