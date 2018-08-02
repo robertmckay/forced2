@@ -1,7 +1,7 @@
 var svg = d3.select("svg"),
     width = svg.attr("width"),
     height = svg.attr("height");
-    
+
 
 var color = d3.scaleOrdinal(d3.schemeCategory20);
 
@@ -9,7 +9,7 @@ var simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id(function(d) { return d.id; }).distance(100).strength(1))
     .force("charge", d3.forceManyBody())
     .force("center", d3.forceCenter(width / 2, height / 2));
-    
+
 
 d3.json("visual1.json", function(error, graph) {
   if (error) throw error;
@@ -38,18 +38,18 @@ var node = svg.selectAll(".node")
           .on("start", dragstarted)
           .on("drag", dragged)
           .on("end", dragended));
-         
 
 
- 
- var rect = svg.selectAll(".transaction").append("rect")
-    .attr("width", 30)
-    .attr("height", 30)
-    .attr("fill", function(d) { return color(d.group); })
-    .call(d3.drag()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended));
+
+
+ // var rect = svg.selectAll(".transaction").append("rect")
+ //    .attr("width", 30)
+ //    .attr("height", 30)
+ //    .attr("fill", function(d) { return color(d.group); })
+ //    .call(d3.drag()
+ //          .on("start", dragstarted)
+ //          .on("drag", dragged)
+ //          .on("end", dragended));
 
     /*
     .attr("class", function (d) {
@@ -58,14 +58,14 @@ var node = svg.selectAll(".node")
 
 
 
-svg.selectAll(".circle").append("circle") 
-    .attr("r", 20)
-    .attr("fill", function(d) { return color(d.group); })
-//.style("fill", function(d) { return fill(d.type); })
-.call(d3.drag()
-          .on("start", dragstarted)
-          .on("drag", dragged)
-          .on("end", dragended));
+// svg.selectAll(".circle").append("circle")
+//     .attr("r", 20)
+//     .attr("fill", function(d) { return color(d.group); })
+// //.style("fill", function(d) { return fill(d.type); })
+// .call(d3.drag()
+//           .on("start", dragstarted)
+//           .on("drag", dragged)
+//           .on("end", dragended));
 
   node.append("title")
       .text(function(d) { return d.title; });  // mouse over text here
@@ -76,25 +76,25 @@ svg.selectAll(".circle").append("circle")
 
   simulation.force("link")
       .links(graph.links);
-      
+
 
   // Squares start on a corner, Circles in the middle
   function centerOffsetSrc(d, p) {
      if (d.source.group === "transaction") {
         return p + 15;
-     } else { 
+     } else {
        console.log(JSON.stringify(d.source.group));
        return p;
-		 }    
+		 }
   }
-  
+
     function centerOffsetDst(d, p) {
      if (d.target.group === "transaction") {
         return p + 15;
-     } else { 
+     } else {
        console.log(JSON.stringify(d.source.group));
        return p;
-		 }    
+		 }
   }
 
 

@@ -1,0 +1,61 @@
+.links line {
+    stroke: #999;
+    stroke-opacity: 0.6;
+}
+
+.nodes circle {
+    stroke: #fff;
+    stroke-width: 0.5px;
+}
+
+.nodes transaction {
+    stroke: #aaa stroke-width: 0.5px;
+}
+
+.link10 {
+    stroke: #ccc;
+    stroke-width: 3px;
+    stroke-dasharray: 3, 3;
+}
+
+.link1 {
+    stroke: #000;
+    stroke-width: 3px;
+}
+
+.nodetext {
+    pointer-events: none;
+    font: 10px sans-serif;
+}
+
+.node.type1 {
+    fill: brown;
+}
+
+.node.type2 {
+    fill: #337147;
+}
+
+.node.type3 {
+    fill: blue;
+}
+
+.node.type4 {
+    fill: red;
+}
+
+.node.type5 {
+    fill: #1BC9E0;
+}
+
+.node.type6 {
+    fill: #E01B98;
+}
+
+image.circle {
+    cursor: pointer;
+}
+
+svg {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+}
